@@ -28,5 +28,8 @@
   "dependencies": {
     "csvtojson": "^2.0.10",
     "winston": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=0.10.3 <15"
   }
 }
