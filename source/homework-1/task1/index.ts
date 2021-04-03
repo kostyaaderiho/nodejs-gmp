@@ -1,4 +1,4 @@
-import { reverseString } from '../utils/formatters';
+import { reverseString } from '../../utils/formatters';
 
 process.stdin.resume();
 process.stdin.on('data', (buffer: Buffer) => {
