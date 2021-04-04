@@ -1,9 +1,9 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getAutoSuggestUsers } from '../routes/users/utils/users.utils';
+import { getAutoSuggestUsers } from '../../routes/users/utils/users.utils';
 import { notFound } from './utils/user.utils';
-import { User } from '../types/user';
+import { User } from '../../types/user';
 
 let users: Array<User> = []; // In memory users.
 
@@ -36,11 +36,12 @@ export const getById = (req: express.Request, res: express.Response) => {
 
 export const update = (req: express.Request, res: express.Response) => {
     let target: User | undefined = users.find(
-        (user) => user.id === req.body.id
+        (user) => user.id === req.params.id
     );
 
     if (!target) {
         res.send(notFound(req.params.id));
+        return;
     }
 
     target = {

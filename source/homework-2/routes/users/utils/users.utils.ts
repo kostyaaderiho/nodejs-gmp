@@ -5,11 +5,13 @@ import { User } from '../../../types/user';
  */
 export const getAutoSuggestUsers = (
     users: Array<User>,
-    loginSubstring: string = '',
+    loginSubstring?: string,
     limit?: number
 ): Array<User> => {
     return users
-        .filter((user: User) => user.login.indexOf(loginSubstring) !== -1)
+        .filter((user: User) =>
+            loginSubstring ? user.login.indexOf(loginSubstring) !== -1 : user
+        )
         .sort((a, b) => {
             if (a.login > b.login) return 1;
             if (a.login < b.login) return -1;
