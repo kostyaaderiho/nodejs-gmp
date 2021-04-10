@@ -55,9 +55,7 @@ export const update = (req: Request, res: Response) => {
 };
 
 export const remove = (req: Request, res: Response) => {
-    const target: User | undefined = users.find(
-        (user) => user.id === req.params.id
-    );
+    const target = users.find((user) => user.id === req.params.id);
 
     if (!target) {
         res.send(notFound(req.params.id));

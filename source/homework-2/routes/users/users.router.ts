@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 
 import {
     post,
@@ -10,7 +10,7 @@ import {
 import { BodySchema as BodyValidationSchema } from './validation/schemas';
 import { validator } from './validation/validator';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/', validator.body(BodyValidationSchema), post);
 router.get('/:id', getById);
