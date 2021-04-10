@@ -9,13 +9,10 @@ export const getAutoSuggestUsers = (
     limit?: number
 ): Array<User> => {
     return users
-        .filter((user: User) =>
-            loginSubstring ? user.login.indexOf(loginSubstring) !== -1 : user
+        .filter(
+            (user: User) =>
+                !loginSubstring || user.login.includes(loginSubstring)
         )
-        .sort((a, b) => {
-            if (a.login > b.login) return 1;
-            if (a.login < b.login) return -1;
-            return 0;
-        })
+        .sort((a, b) => a.login.localeCompare(b.login))
         .slice(0, limit);
 };
