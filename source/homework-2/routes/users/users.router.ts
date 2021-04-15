@@ -6,7 +6,7 @@ import {
     get,
     update,
     remove
-} from '../../controllers/users/users.controller';
+} from '../controllers/users/users.controller';
 import { BodySchema as BodyValidationSchema } from './validation/schemas';
 import { validator } from './validation/validator';
 
