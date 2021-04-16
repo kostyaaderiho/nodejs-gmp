@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 
-import { User as UserModel } from '../../../models/user.model';
+import { UserModel } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { notFound } from './utils/user.utils';
 
@@ -96,7 +96,8 @@ export const remove = async (req: Request, res: Response) => {
                 returning: true
             }
         );
-        if (!result[1]) res.send(notFound(req.params.id));
+
+        if (!result[1].length) res.send(notFound(req.params.id));
 
         res.send(
             `The user with ${result[1][0].id} id has been softly deleted.`

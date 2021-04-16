@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { User, Service } from '../interfaces';
+import { User, Service, UserModelInstance } from '../interfaces';
+
 export class UserService implements Service {
     model;
 
-    constructor(model: any) {
+    constructor(model: UserModelInstance) {
         this.model = model;
     }
 
