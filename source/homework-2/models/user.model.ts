@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 
 import { sequelize } from '../data-access/connection';
-import { UserModel as UMInterface } from '../interfaces/user';
+import { UserModel as UM } from '../interfaces/user';
 
-export const UserModel = sequelize.define<UMInterface>(
+export const UserModel = sequelize.define<UM>(
     'user',
     {
         id: {

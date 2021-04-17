@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
+import { ModelCtor, Model, UpdateOptions, FindOptions } from 'sequelize';
 
-import { User, Service, UserModelInstance } from '../interfaces';
+import { User, Service } from '../interfaces';
 
 export class UserService implements Service {
     model;
 
-    constructor(model: UserModelInstance) {
+    constructor(model: ModelCtor<Model>) {
         this.model = model;
     }
 
@@ -18,19 +19,15 @@ export class UserService implements Service {
         });
     }
 
-    update(user: User, params: object) {
+    update(user: User, params: UpdateOptions) {
         return this.model.update(user, params);
     }
 
-    get(params: object) {
-        return this.model.findOne({
-            ...params
-        });
+    get(params: FindOptions) {
+        return this.model.findOne(params);
     }
 
-    getList(params: object) {
-        return this.model.findAll({
-            ...params
-        });
+    getList(params: FindOptions) {
+        return this.model.findAll(params);
     }
 }

@@ -14,10 +14,3 @@ export interface UserModel extends Model {
     age: number;
     deleted: boolean;
 }
-
-export interface UserModelInstance {
-    create: Function;
-    update: Function;
-    findOne: Function;
-    findAll: Function;
-}

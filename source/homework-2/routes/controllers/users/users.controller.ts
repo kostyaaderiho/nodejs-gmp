@@ -17,12 +17,12 @@ export const post = async (req: Request, res: Response) => {
     }
 };
 
-export const get = async (req: Request, res: Response) => {
-    const {
-        loginSubstring,
-        limit
-    }: { loginSubstring?: string; limit?: number } = req.query;
-
+export const get = async (
+    {
+        query: { loginSubstring, limit }
+    }: { query: { loginSubstring?: string; limit?: number } },
+    res: Response
+) => {
     const userService = new UserService(UserModel);
 
     const query = loginSubstring
@@ -100,7 +100,9 @@ export const remove = async (req: Request, res: Response) => {
         if (!result[1].length) res.send(notFound(req.params.id));
 
         res.send(
-            `The user with ${result[1][0].id} id has been softly deleted.`
+            `The user with ${result[1][0].getDataValue(
+                'id'
+            )} id has been softly deleted.`
         );
     } catch (err) {
         res.send(err);
