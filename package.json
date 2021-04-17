@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "homework-1:task1": "nodemon ./source/homework-1/task1/index.ts",
     "homework-1:task2": "nodemon ./source/homework-1/task2/index.ts",
-    "homework-2": "nodemon ./source/homework-2/server.ts",
+    "homework-2": "nodemon ./source/homework-2/app.ts",
     "lint:js": "eslint source/**/*.ts",
     "lint:js:fix": "npm run lint:js -- --fix",
     "build": "npx tsc"
@@ -39,6 +39,8 @@
     "csvtojson": "^2.0.10",
     "express": "^4.17.1",
     "joi": "^17.4.0",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.2",
     "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
