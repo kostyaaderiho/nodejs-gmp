@@ -15,19 +15,19 @@ export class UserService implements Service {
             ...user,
             age: +user.age,
             deleted: false,
-            id: uuidv4()
+            id: uuidv4(),
         });
+    }
+
+    getById(params: FindOptions) {
+        return this.model.findOne(params);
+    }
+
+    get(params: FindOptions) {
+        return this.model.findAll(params);
     }
 
     update(user: User, params: UpdateOptions) {
         return this.model.update(user, params);
-    }
-
-    get(params: FindOptions) {
-        return this.model.findOne(params);
-    }
-
-    getList(params: FindOptions) {
-        return this.model.findAll(params);
     }
 }

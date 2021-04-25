@@ -1,30 +1,21 @@
 import { DataTypes } from 'sequelize';
 
 import { sequelize } from '../data-access/connection';
-import { UserModel as UM } from '../interfaces/user';
 
-export const UserModel = sequelize.define<UM>(
-    'user',
+export const GroupModel = sequelize.define(
+    'group',
     {
         id: {
             type: DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
         },
-        login: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
+        permission: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
-        age: {
-            type: DataTypes.NUMBER,
-            allowNull: false,
-        },
-        deleted: {
-            type: DataTypes.BOOLEAN,
             allowNull: false,
         },
     },
