@@ -9,5 +9,5 @@ export const entityDeleted = (id: string, softly: boolean = true): string => {
 };
 
 export const entityQueryParamNotProvided = (): string => {
-    return `The entity required query params are not provided`;
+    return 'The entity required query params are not provided';
 };

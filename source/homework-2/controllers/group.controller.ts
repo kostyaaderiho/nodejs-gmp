@@ -22,8 +22,8 @@ export const getById = async ({ params }: Request, res: Response) => {
     try {
         const group = await groupService.getById({
             where: {
-                id: params.id,
-            },
+                id: params.id
+            }
         });
 
         res.send(group || entityNotFound(params.id));
@@ -50,9 +50,9 @@ export const put = async ({ body, params }: Request, res: Response) => {
     try {
         const result = await groupService.update(body, {
             where: {
-                id: params.id,
+                id: params.id
             },
-            returning: true,
+            returning: true
         });
 
         if (!result[1]) res.send(entityNotFound(params.id));

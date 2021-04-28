@@ -10,26 +10,26 @@ export const UserModel = sequelize.define<IUserModel>(
             type: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: DataTypes.UUIDV4
         },
         login: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         age: {
             type: DataTypes.NUMBER,
-            allowNull: false,
+            allowNull: false
         },
         deleted: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
-        timestamps: false,
+        timestamps: false
     }
 );

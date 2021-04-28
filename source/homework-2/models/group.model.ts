@@ -9,18 +9,18 @@ export const GroupModel = sequelize.define(
             type: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: DataTypes.UUIDV4
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         permission: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
-        timestamps: false,
+        timestamps: false
     }
 );

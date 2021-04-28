@@ -11,26 +11,26 @@ export const UserGroupModel = sequelize.define<IUserGroupModel>(
             type: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: DataTypes.UUIDV4
         },
         userid: {
             type: DataTypes.STRING,
             allowNull: false,
             references: {
                 model: UserModel,
-                key: 'id',
-            },
+                key: 'id'
+            }
         },
         groupid: {
             type: DataTypes.STRING,
             allowNull: false,
             references: {
                 model: GroupModel,
-                key: 'id',
-            },
-        },
+                key: 'id'
+            }
+        }
     },
     {
-        timestamps: false,
+        timestamps: false
     }
 );

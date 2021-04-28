@@ -18,7 +18,7 @@ export class UserGroupService {
                     const usergroup = await this.model.create(
                         {
                             userid: userids[0],
-                            groupid,
+                            groupid
                         },
                         { transaction: t }
                     );

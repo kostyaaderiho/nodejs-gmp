@@ -5,7 +5,7 @@ import {
     getById,
     get,
     update,
-    remove,
+    remove
 } from '../../controllers/user.controller';
 import { BodySchema as BodyValidationSchema } from './validation/schemas';
 import { validator } from './validation/validator';

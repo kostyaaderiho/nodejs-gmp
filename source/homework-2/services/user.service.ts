@@ -13,7 +13,7 @@ export class UserService implements Service {
         return this.model.create({
             ...user,
             age: +user.age,
-            deleted: false,
+            deleted: false
         });
     }
 

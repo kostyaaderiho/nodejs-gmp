@@ -4,7 +4,7 @@ import {
     getById,
     post,
     put,
-    remove,
+    remove
 } from '../../controllers/group.controller';
 
 const router = Router();

@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { ModelCtor, Model, UpdateOptions, FindOptions } from 'sequelize';
 
 import { sequelize } from '../data-access/connection';
@@ -13,7 +12,7 @@ export class GroupService implements Service {
 
     create(group: TGroup) {
         return this.model.create({
-            ...group,
+            ...group
         });
     }
 
@@ -39,17 +38,17 @@ export class GroupService implements Service {
             const userGroups: any = await sequelize.models.usergroup.findAll({
                 raw: true,
                 where: {
-                    groupid: id,
+                    groupid: id
                 },
-                attributes: ['userid'],
+                attributes: ['userid']
             });
 
             await sequelize.models.usergroup.destroy({
                 where: {
                     userid: userGroups.map(
                         ({ userid }: { userid: string }) => userid
-                    ),
-                },
+                    )
+                }
             });
 
             return result;
