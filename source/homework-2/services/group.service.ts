@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
 import { ModelCtor, Model, UpdateOptions, FindOptions } from 'sequelize';
 
-import { Group, Service } from '../interfaces';
+import { sequelize } from '../data-access/connection';
+import { TGroup, Service } from '../interfaces';
 
 export class GroupService implements Service {
     model;
@@ -10,10 +11,9 @@ export class GroupService implements Service {
         this.model = model;
     }
 
-    create(group: Group) {
+    create(group: TGroup) {
         return this.model.create({
             ...group,
-            id: uuid(),
         });
     }
 
@@ -25,15 +25,36 @@ export class GroupService implements Service {
         return this.model.findAll(params);
     }
 
-    update(group: Group, params: UpdateOptions) {
+    update(group: TGroup, params: UpdateOptions) {
         return this.model.update(group, params);
     }
 
     async remove(id: string) {
-        const group = await this.model.findOne({ where: { id } });
+        try {
+            const group = await this.model.findOne({ where: { id } });
 
-        if (!group) return '';
+            if (!group) return '';
 
-        return group.destroy();
+            const result = await group.destroy();
+            const userGroups: any = await sequelize.models.usergroup.findAll({
+                raw: true,
+                where: {
+                    groupid: id,
+                },
+                attributes: ['userid'],
+            });
+
+            await sequelize.models.usergroup.destroy({
+                where: {
+                    userid: userGroups.map(
+                        ({ userid }: { userid: string }) => userid
+                    ),
+                },
+            });
+
+            return result;
+        } catch (err) {
+            return err;
+        }
     }
 }

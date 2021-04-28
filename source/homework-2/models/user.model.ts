@@ -1,15 +1,16 @@
 import { DataTypes } from 'sequelize';
 
 import { sequelize } from '../data-access/connection';
-import { UserModel as UM } from '../interfaces/user';
+import { IUserModel } from '../interfaces/user';
 
-export const UserModel = sequelize.define<UM>(
+export const UserModel = sequelize.define<IUserModel>(
     'user',
     {
         id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
+            defaultValue: DataTypes.UUIDV4,
         },
         login: {
             type: DataTypes.STRING,

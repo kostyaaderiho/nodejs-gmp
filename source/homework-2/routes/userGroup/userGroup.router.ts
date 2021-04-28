@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { addUsersToGroup } from '../../controllers/userGroup.controller';
+import { post, get } from '../../controllers/userGroup.controller';
 
 const router = Router();
 
-router.post('/', addUsersToGroup);
+router.post('/', post);
+router.get('/', get);
 
 export { router };

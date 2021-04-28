@@ -10,7 +10,7 @@ export const init = () => {
     app.use(json());
     app.use('/api/users', userRouter);
     app.use('/api/groups', groupRouter);
-    app.use('/api/addUsersToGroup', userGroupRouter);
+    app.use('/api/usergroups', userGroupRouter);
 
     return app;
 };

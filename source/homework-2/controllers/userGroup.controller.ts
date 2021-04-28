@@ -1,29 +1,40 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 import { entityQueryParamNotProvided } from './utils/entity.utils';
 import { UserGroupService } from '../services/userGroup.service';
 import { UserGroupModel } from '../models/userGroup.model';
 
-export const addUsersToGroup = async (
+export const post = async (
     {
-        query: { userIds, groupId },
-    }: { query: { userIds?: string; groupId?: string } },
+        body: { userids, groupid },
+    }: { body: { userids?: string; groupid?: string } },
     res: Response
 ) => {
-    if (!userIds || !groupId) {
+    if (!userids || !groupid) {
         res.send(entityQueryParamNotProvided());
         return;
     }
 
     const userGroupService = new UserGroupService(UserGroupModel);
+    try {
+        const usergroups = await userGroupService.create({
+            userids: userids.split(','),
+            groupid,
+        });
+        res.send(usergroups);
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+};
+
+export const get = async (req: Request, res: Response) => {
+    const userGroupService = new UserGroupService(UserGroupModel);
 
     try {
-        const userGroup = await userGroupService.create({
-            userId: userIds,
-            groupId,
-        });
+        const userGroups = await userGroupService.get();
 
-        res.send(userGroup);
+        res.send(userGroups);
     } catch (err) {
         console.log(err);
         res.send(err);
