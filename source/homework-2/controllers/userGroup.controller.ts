@@ -6,8 +6,8 @@ import { UserGroupModel } from '../models/userGroup.model';
 
 export const post = async (
     {
-        body: { userids, groupid }
-    }: { body: { userids?: string; groupid?: string } },
+        body: { userids, groupid },
+    }: { body: { userids: string; groupid: string } },
     res: Response
 ) => {
     if (!userids || !groupid) {
@@ -19,7 +19,7 @@ export const post = async (
     try {
         const usergroups = await userGroupService.create({
             userids: userids.split(','),
-            groupid
+            groupid,
         });
         res.send(usergroups);
     } catch (err) {
