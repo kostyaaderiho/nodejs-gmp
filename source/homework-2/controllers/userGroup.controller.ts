@@ -6,11 +6,11 @@ import { UserGroupModel } from '../models/userGroup.model';
 
 export const post = async (
     {
-        body: { userids, groupid },
-    }: { body: { userids: string; groupid: string } },
+        body: { userids, groupId }
+    }: { body: { userids: string; groupId: string } },
     res: Response
 ) => {
-    if (!userids || !groupid) {
+    if (!userids || !groupId) {
         res.send(entityQueryParamNotProvided());
         return;
     }
@@ -19,7 +19,7 @@ export const post = async (
     try {
         const usergroups = await userGroupService.create({
             userids: userids.split(','),
-            groupid,
+            groupId
         });
         res.send(usergroups);
     } catch (err) {

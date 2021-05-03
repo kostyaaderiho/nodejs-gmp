@@ -1,12 +1,13 @@
 import { DataTypes } from 'sequelize';
 
 import { sequelize } from '../data-access/connection';
+import { IGroupModel } from '../interfaces/group';
 
-export const GroupModel = sequelize.define(
+export const GroupModel = sequelize.define<IGroupModel>(
     'group',
     {
         id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
             defaultValue: DataTypes.UUIDV4

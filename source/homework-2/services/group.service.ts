@@ -1,6 +1,5 @@
 import { ModelCtor, Model, UpdateOptions, FindOptions } from 'sequelize';
 
-import { sequelize } from '../data-access/connection';
 import { TGroup, Service } from '../interfaces';
 
 export class GroupService implements Service {
@@ -35,21 +34,6 @@ export class GroupService implements Service {
             if (!group) return '';
 
             const result = await group.destroy();
-            const userGroups: any = await sequelize.models.usergroup.findAll({
-                raw: true,
-                where: {
-                    groupid: id
-                },
-                attributes: ['userid']
-            });
-
-            await sequelize.models.usergroup.destroy({
-                where: {
-                    userid: userGroups.map(
-                        ({ userid }: { userid: string }) => userid
-                    )
-                }
-            });
 
             return result;
         } catch (err) {

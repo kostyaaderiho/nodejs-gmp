@@ -7,7 +7,7 @@ export const UserModel = sequelize.define<IUserModel>(
     'user',
     {
         id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
@@ -21,7 +21,7 @@ export const UserModel = sequelize.define<IUserModel>(
             allowNull: false
         },
         age: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         deleted: {

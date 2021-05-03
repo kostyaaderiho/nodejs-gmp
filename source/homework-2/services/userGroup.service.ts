@@ -9,7 +9,7 @@ export class UserGroupService {
         this.model = model;
     }
 
-    async create({ userids, groupid }: { userids: string[]; groupid: string }) {
+    async create({ userids, groupId }: { userids: string[]; groupId: string }) {
         try {
             const usergroups: Model[] = [];
 
@@ -17,8 +17,8 @@ export class UserGroupService {
                 for (let i = 0; i < userids.length; i++) {
                     const usergroup = await this.model.create(
                         {
-                            userid: userids[0],
-                            groupid
+                            userId: userids[i].trim(),
+                            groupId
                         },
                         { transaction: t }
                     );

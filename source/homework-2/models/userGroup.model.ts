@@ -1,29 +1,26 @@
 import { DataTypes } from 'sequelize';
 
-import { UserModel, GroupModel } from './';
+import { UserModel } from './user.model';
+import { GroupModel } from './group.model';
 import { IUserGroupModel } from '../interfaces';
 import { sequelize } from '../data-access/connection';
 
 export const UserGroupModel = sequelize.define<IUserGroupModel>(
     'usergroup',
     {
-        id: {
-            type: DataTypes.UUIDV4,
-            primaryKey: true,
-            allowNull: false,
-            defaultValue: DataTypes.UUIDV4
-        },
-        userid: {
+        userId: {
             type: DataTypes.STRING,
             allowNull: false,
+            primaryKey: true,
             references: {
                 model: UserModel,
                 key: 'id'
             }
         },
-        groupid: {
+        groupId: {
             type: DataTypes.STRING,
             allowNull: false,
+            primaryKey: true,
             references: {
                 model: GroupModel,
                 key: 'id'
