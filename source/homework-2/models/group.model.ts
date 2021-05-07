@@ -1,10 +1,10 @@
 import { DataTypes } from 'sequelize';
 
 import { sequelize } from '../data-access/connection';
-import { IUserModel } from '../interfaces/user';
+import { IGroupModel } from '../interfaces/group';
 
-export const UserModel = sequelize.define<IUserModel>(
-    'user',
+export const GroupModel = sequelize.define<IGroupModel>(
+    'group',
     {
         id: {
             type: DataTypes.STRING,
@@ -12,20 +12,12 @@ export const UserModel = sequelize.define<IUserModel>(
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
-        login: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        password: {
+        permission: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        age: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        deleted: {
-            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     },

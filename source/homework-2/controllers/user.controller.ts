@@ -1,17 +1,32 @@
 import { Request, Response } from 'express';
 import { Op } from 'sequelize';
 
-import { UserModel } from '../../../models/user.model';
-import { UserService } from '../../../services/user.service';
-import { notFound } from './utils/user.utils';
+import { UserModel } from '../models/user.model';
+import { UserService } from '../services/user.service';
+import { entityNotFound, entityDeleted } from './utils/entity.utils';
 
-export const post = async (req: Request, res: Response) => {
+export const post = async ({ body }: Request, res: Response) => {
     const userService = new UserService(UserModel);
 
     try {
-        const user = await userService.create(req.body);
+        const user = await userService.create(body);
 
         res.json(user);
+    } catch (err) {
+        res.send(err);
+    }
+};
+
+export const getById = async ({ params }: Request, res: Response) => {
+    const userService = new UserService(UserModel);
+
+    try {
+        const user = await userService.getById({
+            where: {
+                id: params.id
+            }
+        });
+        res.send(user || entityNotFound(params.id));
     } catch (err) {
         res.send(err);
     }
@@ -34,7 +49,7 @@ export const get = async (
         : {};
 
     try {
-        const users = await userService.getList({
+        const users = await userService.get({
             where: query,
             limit,
             order: [['login', 'ASC']]
@@ -46,33 +61,18 @@ export const get = async (
     }
 };
 
-export const getById = async (req: Request, res: Response) => {
+export const update = async ({ body, params }: Request, res: Response) => {
     const userService = new UserService(UserModel);
 
     try {
-        const user = await userService.get({
+        const result = await userService.update(body, {
             where: {
-                id: req.params.id
-            }
-        });
-        res.send(user || notFound(req.params.id));
-    } catch (err) {
-        res.send(err);
-    }
-};
-
-export const update = async (req: Request, res: Response) => {
-    const userService = new UserService(UserModel);
-
-    try {
-        const result = await userService.update(req.body, {
-            where: {
-                id: req.params.id
+                id: params.id
             },
             returning: true
         });
 
-        if (!result[1]) res.send(notFound(req.params.id));
+        if (!result[1].length) res.send(entityNotFound(params.id));
 
         res.send(result[1][0]);
     } catch (err) {
@@ -80,30 +80,29 @@ export const update = async (req: Request, res: Response) => {
     }
 };
 
-export const remove = async (req: Request, res: Response) => {
+export const remove = async ({ body, params }: Request, res: Response) => {
     const userService = new UserService(UserModel);
 
     try {
         const result = await userService.update(
             {
-                ...req.body,
+                ...body,
                 deleted: true
             },
             {
                 where: {
-                    id: req.params.id
+                    id: params.id
                 },
                 returning: true
             }
         );
 
-        if (!result[1].length) res.send(notFound(req.params.id));
+        if (!result[1].length) {
+            res.send(entityNotFound(params.id));
+            return;
+        }
 
-        res.send(
-            `The user with ${result[1][0].getDataValue(
-                'id'
-            )} id has been softly deleted.`
-        );
+        res.send(entityDeleted(params.id));
     } catch (err) {
         res.send(err);
     }

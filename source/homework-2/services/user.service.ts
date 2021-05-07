@@ -1,7 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
 import { ModelCtor, Model, UpdateOptions, FindOptions } from 'sequelize';
 
-import { User, Service } from '../interfaces';
+import { TUser, Service } from '../interfaces';
 
 export class UserService implements Service {
     model;
@@ -10,24 +9,23 @@ export class UserService implements Service {
         this.model = model;
     }
 
-    create(user: User) {
+    create(user: TUser) {
         return this.model.create({
             ...user,
             age: +user.age,
-            deleted: false,
-            id: uuidv4()
+            deleted: false
         });
     }
 
-    update(user: User, params: UpdateOptions) {
-        return this.model.update(user, params);
-    }
-
-    get(params: FindOptions) {
+    getById(params: FindOptions) {
         return this.model.findOne(params);
     }
 
-    getList(params: FindOptions) {
+    get(params: FindOptions) {
         return this.model.findAll(params);
+    }
+
+    update(user: TUser, params: UpdateOptions) {
+        return this.model.update(user, params);
     }
 }
