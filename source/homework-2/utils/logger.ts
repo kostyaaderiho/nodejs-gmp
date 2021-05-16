@@ -10,7 +10,8 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 export const logger = createLogger({
     format: combine(label({ label: 'Source:' }), timestamp(), myFormat),
     transports: [
-        new transports.Console(),
-        new transports.File({ filename: 'source.log' })
-    ]
+        new transports.File({
+            filename: 'info.log',
+        }),
+    ],
 });

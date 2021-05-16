@@ -2,7 +2,7 @@ import { pipeline } from 'stream';
 import csv from 'csvtojson';
 import fs from 'fs';
 
-import { logger } from '../../utils/logger';
+import { logger } from '../../homework-2/utils/logger';
 
 const INPUT_FILE_NAME: string = 'nodejs-hw1-ex1.csv';
 const OUTPUT_FILE_NAME: string = 'output.txt';
