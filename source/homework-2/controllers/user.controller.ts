@@ -18,15 +18,16 @@ export const getById = async ({ params }: Request, res: Response) => {
 
     const user = await userService.getById({
         where: {
-            id: params.id,
-        },
+            id: params.id
+        }
     });
+
     res.send(user || entityNotFound(params.id));
 };
 
 export const get = async (
     {
-        query: { loginSubstring, limit },
+        query: { loginSubstring, limit }
     }: { query: { loginSubstring?: string; limit?: number } },
     res: Response
 ) => {
@@ -34,16 +35,16 @@ export const get = async (
 
     const query = loginSubstring
         ? {
-              login: {
-                  [Op.like]: `%${loginSubstring}%`,
-              },
-          }
+            login: {
+                [Op.like]: `%${loginSubstring}%`
+            }
+        }
         : {};
 
     const users = await userService.get({
         where: query,
         limit,
-        order: [['login', 'ASC']],
+        order: [['login', 'ASC']]
     });
 
     res.send(users);
@@ -54,9 +55,9 @@ export const update = async ({ body, params }: Request, res: Response) => {
 
     const result = await userService.update(body, {
         where: {
-            id: params.id,
+            id: params.id
         },
-        returning: true,
+        returning: true
     });
 
     if (!result[1].length) res.send(entityNotFound(params.id));
@@ -70,13 +71,13 @@ export const remove = async ({ body, params }: Request, res: Response) => {
     const result = await userService.update(
         {
             ...body,
-            deleted: true,
+            deleted: true
         },
         {
             where: {
-                id: params.id,
+                id: params.id
             },
-            returning: true,
+            returning: true
         }
     );
 

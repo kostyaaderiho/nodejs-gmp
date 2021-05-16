@@ -1,2 +1,2 @@
-export * from './asyncRequest';
+export * from './promisifyRequest';
 export * from './timing';

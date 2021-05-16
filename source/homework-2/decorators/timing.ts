@@ -4,14 +4,12 @@ import { logger } from '../utils/logger';
 
 export const timing = (fn: Function) => {
     return async (...args: [Request, Response, NextFunction]) => {
-        const time = new Date().getTime();
+        const start = Date.now();
 
         const result = await fn.apply(this, args);
 
         logger.info(
-            `${args[0].originalUrl} execution time: ${
-                new Date().getTime() - time
-            } ms`
+            `"${args[0].originalUrl}, execution time: ${Date.now() - start} ms"`
         );
 
         return result;

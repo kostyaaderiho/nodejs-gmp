@@ -5,19 +5,19 @@ import {
     getById,
     post,
     put,
-    remove,
+    remove
 } from '../../controllers/group.controller';
 import { logRequest } from '../../middlewares';
-import { asyncRequest } from '../../decorators';
-import { groupUrl } from '../../constants/api.constant';
+import { promisifyRequest, timing } from '../../decorators';
+import { groupUrl } from '../../constants';
 
 const router = Router();
 const logger = logRequest(groupUrl);
 
-router.get('/', logger, asyncRequest(get));
-router.get('/:id', logger, asyncRequest(getById));
-router.post('/', logger, asyncRequest(post));
-router.put('/:id', logger, asyncRequest(put));
-router.delete('/:id', logger, asyncRequest(remove));
+router.get('/', logger, timing(promisifyRequest(get)));
+router.get('/:id', logger, timing(promisifyRequest(getById)));
+router.post('/', logger, timing(promisifyRequest(post)));
+router.put('/:id', logger, timing(promisifyRequest(put)));
+router.delete('/:id', logger, timing(promisifyRequest(remove)));
 
 export { router };

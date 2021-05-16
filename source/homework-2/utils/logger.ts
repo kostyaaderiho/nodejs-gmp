@@ -11,7 +11,7 @@ export const logger = createLogger({
     format: combine(label({ label: 'Source:' }), timestamp(), myFormat),
     transports: [
         new transports.File({
-            filename: 'info.log',
-        }),
-    ],
+            filename: 'info.log'
+        })
+    ]
 });

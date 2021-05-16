@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { loggerMessages, logger } from '../utils';
 
 export const logErrors = (
-    err: any,
+    err: string,
     req: Request,
     res: Response,
     next: NextFunction
