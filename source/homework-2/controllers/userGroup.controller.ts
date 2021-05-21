@@ -16,27 +16,17 @@ export const post = async (
     }
 
     const userGroupService = new UserGroupService(UserGroupModel);
-    try {
-        const usergroups = await userGroupService.create({
-            userids: userids.split(','),
-            groupId
-        });
-        res.send(usergroups);
-    } catch (err) {
-        console.log(err);
-        res.send(err);
-    }
+    const usergroups = await userGroupService.create({
+        userids: userids.split(','),
+        groupId
+    });
+
+    res.send(usergroups);
 };
 
 export const get = async (req: Request, res: Response) => {
     const userGroupService = new UserGroupService(UserGroupModel);
+    const userGroups = await userGroupService.get();
 
-    try {
-        const userGroups = await userGroupService.get();
-
-        res.send(userGroups);
-    } catch (err) {
-        console.log(err);
-        res.send(err);
-    }
+    res.send(userGroups);
 };
