@@ -5,14 +5,14 @@ import {
     userGroupRouter,
     userRouter,
     groupRouter,
-    loginRouter,
+    loginRouter
 } from '../routes';
 import {
     userUrl,
     groupUrl,
     userGroupUrl,
     messages,
-    loginUrl,
+    loginUrl
 } from '../constants';
 import { logErrors, errorHandler } from '../middlewares';
 import { catchUncaughtException } from '../utils';
@@ -23,7 +23,7 @@ export const init = () => {
     app.use(json());
     app.use(
         urlencoded({
-            extended: true,
+            extended: true
         })
     );
     app.use(cors());
@@ -36,7 +36,7 @@ export const init = () => {
     app.use((req, res, next) => {
         next({
             status: 404,
-            message: messages['404'],
+            message: messages['404']
         });
     });
     app.use(logErrors);

@@ -5,7 +5,7 @@ import {
     getById,
     post,
     put,
-    remove,
+    remove
 } from '../controllers/group.controller';
 import { logRequest, loginCheck } from '../middlewares';
 import { promisifyRequest, timing } from '../decorators';

@@ -14,7 +14,7 @@ export class AuthService {
 
     login(body: { username: string; password: string }) {
         const token = jwt.sign(body, JWT_SECRET_KEY, {
-            expiresIn: this.jtwExpiryS,
+            expiresIn: this.jtwExpiryS
         });
 
         return token;

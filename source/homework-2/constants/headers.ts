@@ -1,3 +1,3 @@
 export const HEADERS = {
-    authorization: 'Authorization',
+    authorization: 'Authorization'
 };
