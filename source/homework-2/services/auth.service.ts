@@ -4,15 +4,15 @@ import jwt from 'jsonwebtoken';
 import { messages, HEADERS, JWT_SECRET_KEY } from '../constants';
 
 export class AuthService {
-    jtwExpiryS: number;
+    jwtExpiryS: number;
 
-    constructor({ jtwExpiryS } = { jtwExpiryS: 30 }) {
-        this.jtwExpiryS = jtwExpiryS;
+    constructor({ jwtExpiryS } = { jwtExpiryS: 30 }) {
+        this.jwtExpiryS = jwtExpiryS;
     }
 
     signin(body: { username: string; password: string }) {
         return jwt.sign(body, JWT_SECRET_KEY, {
-            expiresIn: this.jtwExpiryS
+            expiresIn: this.jwtExpiryS
         });
     }
 
