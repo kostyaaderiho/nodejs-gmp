@@ -1,5 +1,7 @@
 import express, { json, urlencoded } from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import path from 'path';
 
 import {
     userGroupRouter,
@@ -19,6 +21,10 @@ import { catchUncaughtException } from '../utils';
 
 export const init = () => {
     const app = express();
+
+    dotenv.config({
+        path: path.resolve(__dirname, '../config/', '.env')
+    });
 
     app.use(json());
     app.use(

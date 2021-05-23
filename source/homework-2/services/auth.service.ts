@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { messages, HEADERS } from '../constants';
-
-const JWT_SECRET_KEY = 'jwtsecretkey';
+import { messages, HEADERS, JWT_SECRET_KEY } from '../constants';
 
 export class AuthService {
     jtwExpiryS: number;
@@ -12,12 +10,10 @@ export class AuthService {
         this.jtwExpiryS = jtwExpiryS;
     }
 
-    login(body: { username: string; password: string }) {
-        const token = jwt.sign(body, JWT_SECRET_KEY, {
+    signin(body: { username: string; password: string }) {
+        return jwt.sign(body, JWT_SECRET_KEY, {
             expiresIn: this.jtwExpiryS
         });
-
-        return token;
     }
 
     loginCheck(req: Request, res: Response, next: NextFunction) {
