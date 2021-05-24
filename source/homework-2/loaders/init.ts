@@ -1,19 +1,43 @@
-import express, { json } from 'express';
+import express, { json, urlencoded } from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import path from 'path';
 
-import { router as userGroupRouter } from '../routes/userGroup/userGroup.router';
-import { router as userRouter } from '../routes/users/user.router';
-import { router as groupRouter } from '../routes/group/group.router';
-import { userUrl, groupUrl, userGroupUrl, messages } from '../constants';
+import {
+    userGroupRouter,
+    userRouter,
+    groupRouter,
+    loginRouter
+} from '../routes';
+import {
+    userUrl,
+    groupUrl,
+    userGroupUrl,
+    messages,
+    loginUrl
+} from '../constants';
 import { logErrors, errorHandler } from '../middlewares';
 import { catchUncaughtException } from '../utils';
 
 export const init = () => {
     const app = express();
 
+    dotenv.config({
+        path: path.resolve(__dirname, '../config/', '.env')
+    });
+
     app.use(json());
+    app.use(
+        urlencoded({
+            extended: true
+        })
+    );
+    app.use(cors());
+
     app.use(userUrl, userRouter);
     app.use(groupUrl, groupRouter);
     app.use(userGroupUrl, userGroupRouter);
+    app.use(loginUrl, loginRouter);
 
     app.use((req, res, next) => {
         next({
