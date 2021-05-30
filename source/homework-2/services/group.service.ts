@@ -10,9 +10,7 @@ export class GroupService implements Service {
     }
 
     create(group: TGroup) {
-        return this.model.create({
-            ...group
-        });
+        return this.model.create(group);
     }
 
     getById(params: FindOptions) {
@@ -28,16 +26,12 @@ export class GroupService implements Service {
     }
 
     async remove(id: string) {
-        try {
-            const group = await this.model.findOne({ where: { id } });
+        const group = await this.model.findOne({ where: { id } });
 
-            if (!group) return '';
+        if (!group) return '';
 
-            const result = await group.destroy();
+        const result = await group.destroy();
 
-            return result;
-        } catch (err) {
-            return err;
-        }
+        return result;
     }
 }

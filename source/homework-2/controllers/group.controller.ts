@@ -42,7 +42,10 @@ export const put = async ({ body, params }: Request, res: Response) => {
         returning: true
     });
 
-    if (!result[1]) res.send(entityNotFound(params.id));
+    if (!result[1]) {
+        res.send(entityNotFound(params.id));
+        return;
+    }
 
     res.send(result[1][0]);
 };

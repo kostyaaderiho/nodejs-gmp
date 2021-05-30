@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "homework-1:task1": "nodemon ./source/homework-1/task1/index.ts",
     "homework-1:task2": "nodemon ./source/homework-1/task2/index.ts",
     "homework-2": "nodemon ./source/homework-2/app.ts",
     "lint:js": "eslint source/**/*.ts",
     "lint:js:fix": "npm run lint:js -- --fix",
-    "build": "npx tsc"
+    "build": "npx tsc",
+    "test:coverage": "npm test -- --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.23",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^14.14.35",
@@ -33,7 +35,9 @@
     "@typescript-eslint/parser": "^4.21.0",
     "eslint": "^7.24.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^27.0.2",
     "nodemon": "^2.0.7",
+    "ts-jest": "^27.0.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
