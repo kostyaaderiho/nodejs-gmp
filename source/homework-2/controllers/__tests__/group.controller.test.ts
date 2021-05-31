@@ -42,7 +42,8 @@ describe('Group controller:', () => {
         };
 
         test('should get group by id correctly', async () => {
-            const mockGetById = jest.fn(() => ({ id: 1 }));
+            const mockData = { id: 1 };
+            const mockGetById = jest.fn(() => mockData);
 
             GroupService.mockImplementationOnce(() => ({
                 getById: mockGetById
@@ -54,7 +55,7 @@ describe('Group controller:', () => {
             expect(mockGetById.mock.calls[0][0]).toEqual({
                 where: mockReq.params
             });
-            expect(mockRes.send).toHaveBeenCalledWith({ id: 1 });
+            expect(mockRes.send).toHaveBeenCalledWith(mockData);
         });
 
         test('should return error if group was not found', async () => {
@@ -75,7 +76,8 @@ describe('Group controller:', () => {
         const mockReq = {};
 
         test('should get group list correctly', async () => {
-            const mockGet = jest.fn(() => [{ id: 1 }, { id: 2 }]);
+            const mockData = [{ id: 1 }, { id: 2 }];
+            const mockGet = jest.fn(() => mockData);
 
             GroupService.mockImplementationOnce(() => ({
                 get: mockGet
@@ -85,7 +87,7 @@ describe('Group controller:', () => {
 
             expect(GroupService).toHaveBeenCalledTimes(1);
             expect(mockGet).toHaveBeenCalledTimes(1);
-            expect(mockRes.send).toHaveBeenCalledWith([{ id: 1 }, { id: 2 }]);
+            expect(mockRes.send).toHaveBeenCalledWith(mockData);
         });
     });
 

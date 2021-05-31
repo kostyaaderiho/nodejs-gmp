@@ -3,9 +3,9 @@ import { post, getById, get, update, remove } from '../user.controller';
 import { entityNotFound, entityDeleted } from '../utils/entity.utils';
 import { UserService } from '../../services/user.service';
 
+jest.mock('sequelize');
 jest.mock('../../services/user.service');
 jest.mock('../utils/entity.utils');
-jest.mock('sequelize');
 
 describe('User controller', () => {
     const mockRes = {
@@ -78,13 +78,24 @@ describe('User controller', () => {
         };
 
         test('should get user list correctly', async () => {
+            const mockGet = jest.fn(() => [{ id: 1 }, { id: 2 }]);
+
             UserService.mockImplementationOnce(() => ({
-                get: () => [{ id: 1 }, { id: 2 }]
+                get: mockGet
             }));
 
             await get(mockReq, mockRes);
 
             expect(UserService).toHaveBeenCalledTimes(1);
+            expect(mockGet.mock.calls[0][0]).toEqual({
+                where: {
+                    login: {
+                        ['mockedOp.like']: `%${mockReq.query.loginSubstring}%`
+                    }
+                },
+                limit: mockReq.query.limit,
+                order: [['login', 'ASC']]
+            });
             expect(mockRes.send).toHaveBeenCalledWith([{ id: 1 }, { id: 2 }]);
         });
     });
