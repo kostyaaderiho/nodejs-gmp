@@ -3,7 +3,7 @@ export const entityNotFound = (id: string): string => {
 };
 
 export const entityDeleted = (id: string, softly: boolean = true): string => {
-    return `The entity with ${id} id has beed${
+    return `The entity with ${id} id has been${
         softly ? ' softly' : ''
     } deleted.`;
 };

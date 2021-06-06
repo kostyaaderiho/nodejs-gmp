@@ -19,7 +19,7 @@ describe('UserGroup controller', () => {
     });
 
     describe('POST', () => {
-        test('should render correctly', async () => {
+        test('should create userGroup correctly', async () => {
             const mockReq = {
                 body: {
                     userids: '1',

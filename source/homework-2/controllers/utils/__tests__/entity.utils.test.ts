@@ -13,11 +13,11 @@ describe('Entity utils', () => {
 
     test('entityDeleted() should be called correctly', () => {
         expect(entityDeleted('1')).toEqual(
-            'The entity with 1 id has beed softly deleted.'
+            'The entity with 1 id has been softly deleted.'
         );
 
         expect(entityDeleted('1', false)).toEqual(
-            'The entity with 1 id has beed deleted.'
+            'The entity with 1 id has been deleted.'
         );
     });
 
